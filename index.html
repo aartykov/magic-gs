@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="PyTorchGeoNodes is a differentiable module for reconstructing 3D objects from images using interpretable shape programs.">
+  <meta name="keywords" content="PyTorchGeoNodes, Shape, Programs">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PyTorchGeoNodes</title>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-KBEHJ0BXY4"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-KBEHJ0BXY4');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/logo.jpg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+
+<body>
+
+<!--<nav class="navbar" role="navigation" aria-label="main navigation">-->
+<!--  <div class="navbar-brand">-->
+<!--    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">-->
+<!--      <span aria-hidden="true"></span>-->
+<!--      <span aria-hidden="true"></span>-->
+<!--      <span aria-hidden="true"></span>-->
+<!--    </a>-->
+<!--  </div>-->
+<!--  <div class="navbar-menu">-->
+<!--    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">-->
+<!--      <a class="navbar-item" href="https://keunhong.com">-->
+<!--      <span class="icon">-->
+<!--          <i class="fas fa-home"></i>-->
+<!--      </span>-->
+<!--      </a>-->
+
+<!--      <div class="navbar-item has-dropdown is-hoverable">-->
+<!--        <a class="navbar-link">-->
+<!--          More Research-->
+<!--        </a>-->
+<!--        <div class="navbar-dropdown">-->
+<!--          <a class="navbar-item" href="https://vevenom.github.io/r1">-->
+<!--            R1-->
+<!--          </a>-->
+<!--          <a class="navbar-item" href="https://vevenom.github.io/r2">-->
+<!--            R2-->
+<!--          </a>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+
+<!--  </div>-->
+<!--</nav>-->
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">PyTorchGeoNodes</h1>
+          <div class="is-size-5 publication-authors">
+              <img src="./static/images/logo.jpg"
+                 class="interpolation-image"
+                 alt="Logo" style="height: 100px;"/>
+              </br>
+            <span class="author-block">
+              <a href="https://vevenom.github.io" target="_blank">Sinisa Stekovic</a><sup>1</sup>,</span>
+            <span class="author-block">
+              <a href="https://www.tugraz.at/institute/icg/research/team-fraundorfer/people/stefan-ainetter/" target="_blank">Stefan Ainetter</a><sup>1</sup>,</span>
+            <span class="author-block">
+              <a href="">Mattia D'Urso</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://www.tugraz.at/institute/icg/research/team-fraundorfer/people/friedrich-fraundorfer/ " target="_blank">Friedrich Fraundorfer</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://vincentlepetit.github.io/" target="_blank">Vincent Lepetit</a><sup>2</sup>,
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>Institute for Computer Graphics and Vision, Graz University of Technology,</span>
+            <span class="author-block"><sup>2</sup>LIGM, Ecole des Ponts, Univ Gustave Eiffel, CNRS</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2404.10620"
+                   target="_blank"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+                <a href="https://vevenom.github.io/pytorchgeonodes/static/pdf/pytorchgeonodes_supplementary.pdf"
+                   target="_blank"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Supplementary Material</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code (Coming Soon)</span>
+                </a>
+              </span>
+<!--              <span class="link-block">-->
+<!--                <a href="https://arxiv.org/abs/2011.12948"-->
+<!--                   class="external-link button is-normal is-rounded is-dark">-->
+<!--                  <span class="icon">-->
+<!--                      <i class="ai ai-arxiv"></i>-->
+<!--                  </span>-->
+<!--                  <span>arXiv</span>-->
+<!--                </a>-->
+<!--              </span>-->
+              <!-- Video Link. -->
+<!--              <span class="link-block">-->
+<!--                <a href="https://www.youtube.com/watch?v=MrKrnHhk8IA"-->
+<!--                   class="external-link button is-normal is-rounded is-dark">-->
+<!--                  <span class="icon">-->
+<!--                      <i class="fab fa-youtube"></i>-->
+<!--                  </span>-->
+<!--                  <span>Video</span>-->
+<!--                </a>-->
+<!--              </span>-->
+              <!-- Code Link. -->
+<!--              <span class="link-block">-->
+<!--                <a href="https://github.com/google/nerfies"-->
+<!--                   class="external-link button is-normal is-rounded is-dark">-->
+<!--                  <span class="icon">-->
+<!--                      <i class="fab fa-github"></i>-->
+<!--                  </span>-->
+<!--                  <span>Code</span>-->
+<!--                  </a>-->
+<!--              </span>-->
+              <!-- Dataset Link. -->
+<!--              <span class="link-block">-->
+<!--                <a href="https://github.com/google/nerfies/releases/tag/0.1"-->
+<!--                   class="external-link button is-normal is-rounded is-dark">-->
+<!--                  <span class="icon">-->
+<!--                      <i class="far fa-images"></i>-->
+<!--                  </span>-->
+<!--                  <span>Data</span>-->
+<!--                  </a>-->
+<!--              </span>-->
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <h2 class="subtitle has-text-centered">
+        <span class="pytorchgeonodes">PyTorchGeoNodes</span> is a differentiable module for reconstructing 3D objects from images using interpretable shape programs.
+      </h2>
+      <video id="teaser" height="10%" autoplay muted loop playsinline>
+        <source src="./static/videos/teaser.mp4"
+                type="video/mp4">
+      </video>
+    </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            We propose PyTorchGeoNodes, a differentiable module for reconstructing 3D objects from images using interpretable shape programs. In comparison to traditional CAD model retrieval methods, the use of shape programs for 3D reconstruction allows for reasoning about the semantic properties of reconstructed objects, editing, low memory footprint, etc. However, the utilization of shape programs for 3D scene understanding has been largely neglected in past works. As our main contribution, we enable gradient-based optimization by introducing a module that translates shape programs designed in Blender, for example, into efficient PyTorch code. We also provide a method that relies on PyTorchGeoNodes and is inspired by Monte Carlo Tree Search (MCTS) to jointly optimize discrete and continuous parameters of shape programs and reconstruct 3D objects for input scenes. In our experiments, we apply our algorithm to reconstruct 3D objects in the ScanNet dataset and evaluate our results against CAD model retrieval-based reconstructions. Our experiments indicate that our reconstructions match well the input scenes while enabling semantic reasoning about reconstructed objects.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+
+<section class="section">
+
+  <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <div class="content has-text-justified">
+          <img src="./static/images/teaser2.png"
+                 class="interpolation-image"
+                 alt="Teaser image."/>
+            <p> Given interpretable input shape parameters, a shape program generates a mesh for a 3D object. Our differentiable pipeline makes possible the flow of gradients from the generated shape to the continuous parameters. We show a variety of sofas and armchairs generated by a single shape program. The method we propose can retrieve these shapes using a sequence of RGB-D scans as input, estimating both the continuous parameters~(Width, Depth, etc.) and the discrete parameters~(Has Left Arm, Is L-Shaped, etc.).</p>
+        </div>
+      </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">From Blender to PyTorchGeoNodes</h2>
+        <div class="content has-text-justified">
+          <p> Our framework provides different computational nodes that reimplement the functionalities of the individual geometry nodes in Blender. More exactly, for every node type in Blender, we implement a corresponding node type with the same functionalities using PyTorch, or PyTorch3D in case of geometric operations.</p>
+          <img src="./static/images/blender2pytorchgeonodes.png"
+                 class="interpolation-image"
+                 alt="blender2pytorchgeonodes image."/>
+            <p>In the visualization above we show the computational graph designed and visualized in Blender using Geometry Nodes feature. Underneath, we show how we abstract the different nodes using PyTorch tensors and PyTorch3D meshes. The input node takes input parameters, here {Width: 0.5, Dividing Board Thickness: 0.04, Height: 0.6, Number of Dividing Boards: 5, Board Thickness: 0.04} and feeds them to a series of operations.  The blue nodes are arithmetic and concatenation nodes, which transform input parameters and feed the results to geometry nodes, in green. In this example, we generate a cuboid mesh and instantiate a line of points which generates the final geometry for dividing boards. In practice, this shape program is part of a larger shape program for modeling cabinets.</p>
+        </div>
+      </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+
+    <!-- Animation. -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <!-- Interpolating. -->
+        <h3 class="title is-4">Gradient-based optimization of continuous parameters of a shape program</h3>
+        <div class="content has-text-justified">
+          <p>From an initial estimate of the parameters of the object, we can perform gradient descent on the parameters based on a 3D geometric loss term. In contrast to methods that directly optimize the reconstructed mesh, PyTorchGeoNodes allows optimization in the parameter space which has several benefits. From the resulting shapes in the example below, it is observable that individual parameters can be scaled independently targeting only specific parts of the shape geometry while preserving the compactness of the 3D shape at the same time.</p>
+        </div>
+        <div class="columns is-vcentered interpolation-panel">
+          <div class="column is-3 has-text-centered">
+            <img src="./static/images/interpolate_start.jpg"
+                 class="interpolation-image"
+                 alt="Initialization"/>
+            <p>Initialization</p>
+          </div>
+          <div class="column interpolation-video-column">
+            <div id="interpolation-image-wrapper">
+              Loading...
+            </div>
+            <input class="slider is-fullwidth is-large is-info"
+                   id="interpolation-slider"
+                   step="1" min="1" max="104" value="1" type="range">
+          </div>
+          <div class="column is-3 has-text-centered">
+            <img src="./static/images/interpolate_end.jpg"
+                 class="interpolation-image"
+                 alt="Final result"/>
+            <p class="is-bold">Final step</p>
+          </div>
+        </div>
+        <br/>
+        <!--/ Interpolating. -->
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+
+    <!-- Search. -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <!-- Interpolating. -->
+        <h3 class="title is-4">Joint discrete and continuous parameter optimization</h3>
+        <div class="content has-text-justified">
+          <p>At every iteration, our MCTS-based search algorithm first selects a set of shape parameters and object pose. These are then passed through the differentiable computational graph, parsed by our PyTorchGeoNodes framework for a shape program, that generates a 3D mesh based on the selected shape parameters. Then, we compute the loss that evaluates how well the shape fits the input scene. We further optimize the continuous parameters of our shape program using gradient descent and update the search tree based on this loss.</p>
+        </div>
+        <img src="./static/images/overview.png"
+                 class="interpolation-image"
+                 alt="Search overview image."/>
+        </br>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+
+    <!-- Search. -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+
+        <h3 class="title is-4">Demonstrative examples</h3>
+
+        <div class="columns is-vcentered interpolation-panel">
+          <div class="column is-3 has-text-centered">
+            <img src="./static/images/example1_start.jpg"
+                 class="interpolation-image"
+                 alt="Iteration 1"/>
+            <p>Iteration 1</p>
+          </div>
+          <div class="column interpolation-video-column">
+            <div id="example1-image-wrapper">
+              Loading...
+            </div>
+            <input class="slider is-fullwidth is-large is-info"
+                   id="example1-slider"
+                   step="1" min="1" max="20" value="1" type="range">
+          </div>
+          <div class="column is-3 has-text-centered">
+            <img src="./static/images/example1_end.jpg"
+                 class="interpolation-image"
+                 alt="Final result"/>
+            <p class="is-bold">Final Result</p>
+          </div>
+        </div>
+        <br/>
+
+        <div class="columns is-vcentered interpolation-panel">
+          <div class="column is-3 has-text-centered">
+            <img src="./static/images/example2_start.jpg"
+                 class="interpolation-image"
+                 alt="Iteration 1"/>
+            <p>Iteration 1</p>
+          </div>
+          <div class="column interpolation-video-column">
+            <div id="example2-image-wrapper">
+              Loading...
+            </div>
+            <input class="slider is-fullwidth is-large is-info"
+                   id="example2-slider"
+                   step="1" min="1" max="12" value="1" type="range">
+          </div>
+          <div class="column is-3 has-text-centered">
+            <img src="./static/images/example2_end.jpg"
+                 class="interpolation-image"
+                 alt="Final result"/>
+            <p class="is-bold">Final Result</p>
+          </div>
+        </div>
+        <br/>
+
+        <div class="columns is-vcentered interpolation-panel">
+          <div class="column is-3 has-text-centered">
+            <img src="./static/images/example3_start.jpg"
+                 class="interpolation-image"
+                 alt="Iteration 1"/>
+            <p>Iteration 1</p>
+          </div>
+          <div class="column interpolation-video-column">
+            <div id="example3-image-wrapper">
+              Loading...
+            </div>
+            <input class="slider is-fullwidth is-large is-info"
+                   id="example3-slider"
+                   step="1" min="1" max="19" value="1" type="range">
+          </div>
+          <div class="column is-3 has-text-centered">
+            <img src="./static/images/example3_end.jpg"
+                 class="interpolation-image"
+                 alt="Final result"/>
+            <p class="is-bold">Final Result</p>
+          </div>
+        </div>
+        <br/>
+
+        <div class="columns is-vcentered interpolation-panel">
+          <div class="column is-3 has-text-centered">
+            <img src="./static/images/example4_start.jpg"
+                 class="interpolation-image"
+                 alt="Iteration 1"/>
+            <p>Iteration 1</p>
+          </div>
+          <div class="column interpolation-video-column">
+            <div id="example4-image-wrapper">
+              Loading...
+            </div>
+            <input class="slider is-fullwidth is-large is-info"
+                   id="example4-slider"
+                   step="1" min="1" max="24" value="1" type="range">
+          </div>
+          <div class="column is-3 has-text-centered">
+            <img src="./static/images/example4_end.jpg"
+                 class="interpolation-image"
+                 alt="Final result"/>
+            <p class="is-bold">Final Result</p>
+          </div>
+        </div>
+        <br/>
+
+        <div class="columns is-vcentered interpolation-panel">
+          <div class="column is-3 has-text-centered">
+            <img src="./static/images/example5_start.jpg"
+                 class="interpolation-image"
+                 alt="Iteration 1"/>
+            <p>Iteration 1</p>
+          </div>
+          <div class="column interpolation-video-column">
+            <div id="example5-image-wrapper">
+              Loading...
+            </div>
+            <input class="slider is-fullwidth is-large is-info"
+                   id="example5-slider"
+                   step="1" min="1" max="24" value="1" type="range">
+          </div>
+          <div class="column is-3 has-text-centered">
+            <img src="./static/images/example5_end.jpg"
+                 class="interpolation-image"
+                 alt="Final result"/>
+            <p class="is-bold">Final Result</p>
+          </div>
+        </div>
+        <br/>
+
+        <div class="columns is-vcentered interpolation-panel">
+          <div class="column is-3 has-text-centered">
+            <img src="./static/images/example6_start.jpg"
+                 class="interpolation-image"
+                 alt="Iteration 1"/>
+            <p>Iteration 1</p>
+          </div>
+          <div class="column interpolation-video-column">
+            <div id="example6-image-wrapper">
+              Loading...
+            </div>
+            <input class="slider is-fullwidth is-large is-info"
+                   id="example6-slider"
+                   step="1" min="1" max="24" value="1" type="range">
+          </div>
+          <div class="column is-3 has-text-centered">
+            <img src="./static/images/example6_end.jpg"
+                 class="interpolation-image"
+                 alt="Final result"/>
+            <p class="is-bold">Final Result</p>
+          </div>
+        </div>
+        <br/>
+        <!--/ Examples. -->
+      </div>
+    </div>
+  </div>
+
+      <!-- Concurrent Work. -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Related Research</h2>
+
+        <div class="content has-text-justified">
+          <p>
+            If you are interested in further reading regarding this topic we suggest following readings (at the time of project release).
+          </p>
+          <p>
+            <a href="https://www.projectaria.com/scenescript/" target="_blank">SceneScript</a> proposes to represent 3D scenes using a structured language and introduces an auto-regressive model to infer scene geometry based on this representation. Interestingly, in the supplementary material, authors suggest possibility of incorporating Blender Geometry Nodes into the SceneScript language, which could be a potential future use case for PyTorchGeoNodes.
+          </p>
+          <p>
+            <a href="https://arxiv.org/abs/2212.11715" target="_blank">GeoCode</a> proposes to use interpretable shape programs for 3D shape synthesis. In addition, this work proposes a deep learning-based method to infer shape parameters from 3D point clouds or 2D sketches.
+          </p>
+          <p>
+            Our previous work <a href="https://arxiv.org/abs/2103.11161" target="_blank">MonteFloor</a> introduces a general method for problems in 3D scene understanding based on joint MCTS and gradient-based optimization. Our <a href="https://arxiv.org/abs/2309.06107" target="_blank">HOC-Search</a> applies similar principles for efficient CAD Model and Pose Retrieval from RGB-D Scans.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Concurrent Work. -->
+</section>
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@article{stekovic2024pytorchgeonodes,
+  author    = {Stekovic, Sinisa and Ainetter, Stefan and D'Urso, Mattia and Fraundorfer, Friedrich and Lepetit, Vincent},
+  title     = {PyTorchGeoNodes: Enabling Differentiable Shape Programs for 3D Shape Reconstruction},
+  journal   = {arxiv},
+  year      = {2024}
+}</code></pre>
+  </div>
+</section>
+
+
+<!--    &lt;!&ndash; Paper video. &ndash;&gt;-->
+<!--    <div class="columns is-centered has-text-centered">-->
+<!--      <div class="column is-four-fifths">-->
+<!--        <h2 class="title is-3">Video</h2>-->
+<!--        <div class="publication-video">-->
+<!--          <iframe src="https://www.youtube.com/embed/MrKrnHhk8IA?rel=0&amp;showinfo=0"-->
+<!--                  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    &lt;!&ndash;/ Paper video. &ndash;&gt;-->
+<!--  </div>-->
+<!--</section>-->
+
+
+<!--<section class="section">-->
+<!--  <div class="container is-max-desktop">-->
+
+<!--    <div class="columns is-centered">-->
+
+<!--      &lt;!&ndash; Visual Effects. &ndash;&gt;-->
+<!--      <div class="column">-->
+<!--        <div class="content">-->
+<!--          <h2 class="title is-3">Visual Effects</h2>-->
+<!--          <p>-->
+<!--            Using <i>nerfies</i> you can create fun visual effects. This Dolly zoom effect-->
+<!--            would be impossible without nerfies since it would require going through a wall.-->
+<!--          </p>-->
+<!--          <video id="dollyzoom" autoplay controls muted loop playsinline height="100%">-->
+<!--            <source src="./static/videos/dollyzoom-stacked.mp4"-->
+<!--                    type="video/mp4">-->
+<!--          </video>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      &lt;!&ndash;/ Visual Effects. &ndash;&gt;-->
+
+<!--      &lt;!&ndash; Matting. &ndash;&gt;-->
+<!--      <div class="column">-->
+<!--        <h2 class="title is-3">Matting</h2>-->
+<!--        <div class="columns is-centered">-->
+<!--          <div class="column content">-->
+<!--            <p>-->
+<!--              As a byproduct of our method, we can also solve the matting problem by ignoring-->
+<!--              samples that fall outside of a bounding box during rendering.-->
+<!--            </p>-->
+<!--            <video id="matting-video" controls playsinline height="100%">-->
+<!--              <source src="./static/videos/matting.mp4"-->
+<!--                      type="video/mp4">-->
+<!--            </video>-->
+<!--          </div>-->
+
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    &lt;!&ndash;/ Matting. &ndash;&gt;-->
+
+<!--    &lt;!&ndash; Animation. &ndash;&gt;-->
+<!--    <div class="columns is-centered">-->
+<!--      <div class="column is-full-width">-->
+<!--        <h2 class="title is-3">Animation</h2>-->
+
+<!--        &lt;!&ndash; Interpolating. &ndash;&gt;-->
+<!--        <h3 class="title is-4">Interpolating states</h3>-->
+<!--        <div class="content has-text-justified">-->
+<!--          <p>-->
+<!--            We can also animate the scene by interpolating the deformation latent codes of two input-->
+<!--            frames. Use the slider here to linearly interpolate between the left frame and the right-->
+<!--            frame.-->
+<!--          </p>-->
+<!--        </div>-->
+<!--        <div class="columns is-vcentered interpolation-panel">-->
+<!--          <div class="column is-3 has-text-centered">-->
+<!--            <img src="./static/images/interpolate_start.jpg"-->
+<!--                 class="interpolation-image"-->
+<!--                 alt="Interpolate start reference image."/>-->
+<!--            <p>Start Frame</p>-->
+<!--          </div>-->
+<!--          <div class="column interpolation-video-column">-->
+<!--            <div id="interpolation-image-wrapper">-->
+<!--              Loading...-->
+<!--            </div>-->
+<!--            <input class="slider is-fullwidth is-large is-info"-->
+<!--                   id="interpolation-slider"-->
+<!--                   step="1" min="0" max="100" value="0" type="range">-->
+<!--          </div>-->
+<!--          <div class="column is-3 has-text-centered">-->
+<!--            <img src="./static/images/interpolate_end.jpg"-->
+<!--                 class="interpolation-image"-->
+<!--                 alt="Interpolation end reference image."/>-->
+<!--            <p class="is-bold">End Frame</p>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <br/>-->
+<!--        &lt;!&ndash;/ Interpolating. &ndash;&gt;-->
+
+<!--        &lt;!&ndash; Re-rendering. &ndash;&gt;-->
+<!--        <h3 class="title is-4">Re-rendering the input video</h3>-->
+<!--        <div class="content has-text-justified">-->
+<!--          <p>-->
+<!--            Using <span class="dnerf">Nerfies</span>, you can re-render a video from a novel-->
+<!--            viewpoint such as a stabilized camera by playing back the training deformations.-->
+<!--          </p>-->
+<!--        </div>-->
+<!--        <div class="content has-text-centered">-->
+<!--          <video id="replay-video"-->
+<!--                 controls-->
+<!--                 muted-->
+<!--                 preload-->
+<!--                 playsinline-->
+<!--                 width="75%">-->
+<!--            <source src="./static/videos/replay.mp4"-->
+<!--                    type="video/mp4">-->
+<!--          </video>-->
+<!--        </div>-->
+<!--        &lt;!&ndash;/ Re-rendering. &ndash;&gt;-->
+
+<!--      </div>-->
+<!--    </div>-->
+<!--    &lt;!&ndash;/ Animation. &ndash;&gt;-->
+
+
+<!--    &lt;!&ndash; Concurrent Work. &ndash;&gt;-->
+<!--    <div class="columns is-centered">-->
+<!--      <div class="column is-full-width">-->
+<!--        <h2 class="title is-3">Related Links</h2>-->
+
+<!--        <div class="content has-text-justified">-->
+<!--          <p>-->
+<!--            There's a lot of excellent work that was introduced around the same time as ours.-->
+<!--          </p>-->
+<!--          <p>-->
+<!--            <a href="https://arxiv.org/abs/2104.09125">Progressive Encoding for Neural Optimization</a> introduces an idea similar to our windowed position encoding for coarse-to-fine optimization.-->
+<!--          </p>-->
+<!--          <p>-->
+<!--            <a href="https://www.albertpumarola.com/research/D-NeRF/index.html">D-NeRF</a> and <a href="https://gvv.mpi-inf.mpg.de/projects/nonrigid_nerf/">NR-NeRF</a>-->
+<!--            both use deformation fields to model non-rigid scenes.-->
+<!--          </p>-->
+<!--          <p>-->
+<!--            Some works model videos with a NeRF by directly modulating the density, such as <a href="https://video-nerf.github.io/">Video-NeRF</a>, <a href="https://www.cs.cornell.edu/~zl548/NSFF/">NSFF</a>, and <a href="https://neural-3d-video.github.io/">DyNeRF</a>-->
+<!--          </p>-->
+<!--          <p>-->
+<!--            There are probably many more by the time you are reading this. Check out <a href="https://dellaert.github.io/NeRF/">Frank Dellart's survey on recent NeRF papers</a>, and <a href="https://github.com/yenchenlin/awesome-NeRF">Yen-Chen Lin's curated list of NeRF papers</a>.-->
+<!--          </p>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    &lt;!&ndash;/ Concurrent Work. &ndash;&gt;-->
+
+<!--  </div>-->
+<!--</section>-->
+
+
+<!--<section class="section" id="BibTeX">-->
+<!--  <div class="container is-max-desktop content">-->
+<!--    <h2 class="title">BibTeX</h2>-->
+<!--    <pre><code>@article{park2021nerfies,-->
+<!--  author    = {Park, Keunhong and Sinha, Utkarsh and Barron, Jonathan T. and Bouaziz, Sofien and Goldman, Dan B and Seitz, Steven M. and Martin-Brualla, Ricardo},-->
+<!--  title     = {Nerfies: Deformable Neural Radiance Fields},-->
+<!--  journal   = {ICCV},-->
+<!--  year      = {2021},-->
+<!--}</code></pre>-->
+<!--  </div>-->
+<!--</section>-->
+
+<!--Uncomment till here-->
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is based on template from <a
+              href="https://nerfies.github.io">Nerfies</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
