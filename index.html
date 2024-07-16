@@ -3,12 +3,14 @@
 <head>
   <meta charset="utf-8">
   <meta name="description"
-        content="PyTorchGeoNodes is a differentiable module for reconstructing 3D objects from images using interpretable shape programs.">
-  <meta name="keywords" content="PyTorchGeoNodes, Shape, Programs">
+        content="We introduce a method that recovers 3D geometry, appearance, and motion of generic articulated objects from a monocular video.">
+  <meta name="keywords" content="MAGIC-GS, articulated objects, gaussian splatting">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>PyTorchGeoNodes</title>
+  <title>MAGIC-GS: Monocular Articulated GenerIC object reconstruction with Gaussian Splatting </title>
 
   <!-- Google tag (gtag.js) -->
+  <!--
+  
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-KBEHJ0BXY4"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -17,7 +19,8 @@
 
     gtag('config', 'G-KBEHJ0BXY4');
   </script>
-
+  
+  
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
         rel="stylesheet">
 
@@ -36,7 +39,8 @@
   <script src="./static/js/bulma-slider.min.js"></script>
   <script src="./static/js/index.js"></script>
 </head>
-
+-->
+  
 <body>
 
 <!--<nav class="navbar" role="navigation" aria-label="main navigation">-->
@@ -79,30 +83,30 @@
     <div class="container is-max-desktop">
       <div class="columns is-centered">
         <div class="column has-text-centered">
-          <h1 class="title is-1 publication-title">PyTorchGeoNodes</h1>
+          <h1 class="title is-1 publication-title">MAGIC-GS</h1>
           <div class="is-size-5 publication-authors">
-              <img src="./static/images/logo.jpg"
-                 class="interpolation-image"
-                 alt="Logo" style="height: 100px;"/>
-              </br>
+              <!-- <img src="./static/images/logo.jpg" -->
+               <!--  class="interpolation-image" -->
+                 <!-- alt="Logo" style="height: 100px;"/> -->
+              <!-- </br> -->
+            
             <span class="author-block">
-              <a href="https://vevenom.github.io" target="_blank">Sinisa Stekovic</a><sup>1</sup>,</span>
+              <a href="https://arslanartykov.com/" target="_blank">Arslan Artykov</a></sup>,</span>
             <span class="author-block">
-              <a href="https://www.tugraz.at/institute/icg/research/team-fraundorfer/people/stefan-ainetter/" target="_blank">Stefan Ainetter</a><sup>1</sup>,</span>
-            <span class="author-block">
-              <a href="">Mattia D'Urso</a><sup>1</sup>,
+              <a href="https://anttwo.github.io/" target="_blank">Antoine Guédon</a></sup>,</span>
+           <span class="author-block">
+              <a href="https://clementinboittiaux.github.io/" target="_blank">Clémentin Boittiaux</a></sup>,</span>
             </span>
             <span class="author-block">
-              <a href="https://www.tugraz.at/institute/icg/research/team-fraundorfer/people/friedrich-fraundorfer/ " target="_blank">Friedrich Fraundorfer</a><sup>1</sup>,
+              <a href="https://nv-nguyen.github.io/" target="_blank">Van Nguyen NGUYEN</a></sup>,
             </span>
             <span class="author-block">
-              <a href="https://vincentlepetit.github.io/" target="_blank">Vincent Lepetit</a><sup>2</sup>,
+              <a href="https://vincentlepetit.github.io/" target="_blank">Vincent Lepetit</a></sup>,
             </span>
           </div>
 
           <div class="is-size-5 publication-authors">
-            <span class="author-block"><sup>1</sup>Institute for Computer Graphics and Vision, Graz University of Technology,</span>
-            <span class="author-block"><sup>2</sup>LIGM, Ecole des Ponts, Univ Gustave Eiffel, CNRS</span>
+            <span class="author-block"></sup>LIGM, Ecole des Ponts, Univ Gustave Eiffel, CNRS</span>
           </div>
 
           <div class="column has-text-centered">
@@ -117,7 +121,7 @@
                   </span>
                   <span>Paper</span>
                 </a>
-                <a href="https://vevenom.github.io/pytorchgeonodes/static/pdf/pytorchgeonodes_supplementary.pdf"
+                <!-- <a href="https://vevenom.github.io/pytorchgeonodes/static/pdf/pytorchgeonodes_supplementary.pdf" -->
                    target="_blank"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
@@ -187,7 +191,7 @@
   <div class="container is-max-desktop">
     <div class="hero-body">
       <h2 class="subtitle has-text-centered">
-        <span class="pytorchgeonodes">PyTorchGeoNodes</span> is a differentiable module for reconstructing 3D objects from images using interpretable shape programs.
+        <span class=We introduce a method that recovers 3D geometry, appearance, and motion of generic articulated objects from a monocular video.
       </h2>
       <video id="teaser" height="10%" autoplay muted loop playsinline>
         <source src="./static/videos/teaser.mp4"
